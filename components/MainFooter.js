@@ -11,8 +11,8 @@ class MainFooter extends Component {
     return (
       <Footer>
         <FooterTab>
-          <Link component={Button} to="/lol">
-            <Icon type="Octicons" name="smiley" />
+          <Link component={Button} to="/">
+            <Icon type="MaterialCommunityIcons" name="baby" />
           </Link>
           <Link component={Button} to="/privateLul">
             <Icon name="lock" />

@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
 
 const instance = axios.create({
-  baseURL: "http://127.0.0.1:8000/"
+  baseURL: "http://192.168.100.244:8000/"
 });
 
 class Store {
@@ -58,7 +58,7 @@ class Store {
           () => console.log("something went wrong with setting jwt token")
         );
       })
-      .catch(err => console.log("something went wrong logging in"));
+      .catch(err => console.log(err));
   }
 
   checkForToken = () => {
