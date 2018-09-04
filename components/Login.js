@@ -40,7 +40,9 @@ class Login extends Component {
         </Item>
         <Button
           full
-          onPress={() => alert("You need to implement Login noob...")}
+          onPress={() =>
+            authStore.loginUser(this.state.username, this.state.password)
+          }
         >
           <Text>Login</Text>
         </Button>
