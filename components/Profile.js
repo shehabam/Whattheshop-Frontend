@@ -1,18 +1,26 @@
 import React, { Component } from "react";
 
 // NativeBase Components
-import { Card, CardItem, Text, Button } from "native-base";
+import { Card, CardItem, Text, Button, View } from "native-base";
 import authStore from "../stores/authStore";
+import { observer } from "mobx-react";
+import store from "../stores/store";
 
 class Profile extends Component {
+  // componentDidMount(){
+  //   // const theID = this.props.match.params.id
+  //   // store.getUserProfile()
+  // }
+
   render() {
+    console.log(authStore.user);
+    if (!authStore.user) return <Redirect to="/register" />;
+
     return (
       <Card>
         <CardItem>
-          <Button
-            danger
-            onPress={() => alert("You need to implement Logout n00b...")}
-          >
+          <Text>{authStore.user.username}</Text>
+          <Button danger onPress={() => authStore.logoutUser()}>
             <Text>Logout</Text>
           </Button>
         </CardItem>
@@ -20,4 +28,4 @@ class Profile extends Component {
     );
   }
 }
-export default Profile;
+export default observer(Profile);
