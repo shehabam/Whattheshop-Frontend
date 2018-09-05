@@ -16,6 +16,7 @@ import { Route, Switch, Redirect } from "react-router-native";
 // Common
 import PrivateRoute from "../common/PrivateRoute";
 import Carda from "./card";
+import registrationForm from "./registrationForm";
 
 class MainContent extends Component {
   render() {
@@ -26,8 +27,10 @@ class MainContent extends Component {
           <Route path="/details/:id" component={Detail} />
           <Route path="/lol" component={Lol} />
           <PrivateRoute path="/privateLul" component={PrivateLul} />
-          <PrivateRoute path="/profile" component={Profile} />
+          <Route path="/register" component={registrationForm} />
           <Route path="/login" component={Login} />
+          <Route path="/profile/" component={Profile} />
+
           <Redirect to="/lol" />
         </Switch>
       </Content>
