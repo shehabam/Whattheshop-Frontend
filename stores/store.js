@@ -6,6 +6,8 @@ class Store {
     constructor() {
         this.product = null;
         this.detailedProduct = null;
+        this.CartList = [];
+        this.counter=0;
     }
     // GETS THE ALL PRODUCTS
     getProducts() {
@@ -26,11 +28,22 @@ class Store {
                 this.detailedProduct = detail;
             });
     }
+
+    // ADD THE PRODUCT TO THE CARTLIST
+    addToTheCartList(id, name, price, img, description){
+        this.CartList.push({id: id, name: name, price: price, img: img, description: description});
+        this.counter += 1;
+        console.log(this.counter)
+
+    }
 }
 decorate(Store, {
     product: observable,
     getProducts: action,
-    detailedProduct: observable
+    detailedProduct: observable,
+    CartList: observable,
+    addToTheCartList: action,
+    counter: observable,
 });
 
 const store = new Store();

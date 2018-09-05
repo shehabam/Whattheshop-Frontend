@@ -15,21 +15,21 @@ import {
     Icon,
     Left,
     Body,
-    View
+    View,
+    List,
+    ListItem
 } from "native-base";
 import store from "../stores/store";
+import { FlatList } from "../node_modules/react-native-gesture-handler";
 
 class Carda extends Component {
     render() {
         if (!store.product) return <View />;
         const item = store.product.map((
-            produ // <Text>{produ.name}</Text>
+            produ
         ) => (
-                <Container key={produ.id}>
-                    <Header />
-                    <Content>
-                        <Link to={"/details/" + produ.id}>
-                            <Card style={{ flex: 0 }}>
+                        <Link to={"/details/" + produ.id} key={produ.id} component={ListItem}>
+                            <Card>
                                 <CardItem>
                                     <Left>
                                         <Thumbnail source={{ uri: produ.img }} />
@@ -38,7 +38,7 @@ class Carda extends Component {
                                             <Text note>
                                                 {produ.price}
                                                 .000 KD
-                    </Text>
+                                            </Text>
                                         </Body>
                                     </Left>
                                 </CardItem>
@@ -53,11 +53,11 @@ class Carda extends Component {
                                 </CardItem>
                             </Card>
                         </Link>
-                    </Content>
-                </Container>
-            ));
+                    ));
 
-        return <Container> {item}</Container>;
+        return <List>
+                    {item}
+                </List>
     }
 }
 export default observer(Carda);

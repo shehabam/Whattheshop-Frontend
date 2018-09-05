@@ -17,6 +17,7 @@ import {
     Right,
     View
 } from "native-base";
+import { bold } from "../node_modules/ansi-colors";
 
 class Detail extends Component {
     componentDidMount() {
@@ -30,8 +31,7 @@ class Detail extends Component {
         return (
             <Container>
                 <Header />
-                <Content>
-                    <Card>
+                    <Card >
                         <CardItem>
                             <Left>
                                 <Body>
@@ -39,7 +39,7 @@ class Detail extends Component {
                                     <Text note>
                                         {detailed.price}
                                         .000 KD
-                  </Text>
+                                     </Text>
                                 </Body>
                             </Left>
                         </CardItem>
@@ -47,14 +47,16 @@ class Detail extends Component {
                         <CardItem cardBody>
                             <Image
                                 source={{ uri: detailed.img }}
-                                style={{ height: 200, width: null, flex: 1 }}
+                                style={{ height: 300,  width: null, flex: 1 }}
                             />
                         </CardItem>
                         <Body>
                             <Text>Description: {detailed.description}</Text>
                         </Body>
                     </Card>
-                </Content>
+                    <Button full success onPress={() => store.addToTheCartList(detailed.id, detailed.name, detailed.price, detailed.img, detailed.description)}>
+                        <Text style={{ fontSize:20, fontWeight:"bold" }}>Add To The Cart</Text>
+                    </Button>
             </Container>
         );
     }

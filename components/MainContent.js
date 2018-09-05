@@ -9,6 +9,7 @@ import Profile from "./Profile";
 import Lol from "./Lol";
 import PrivateLul from "./PrivateLul";
 import Detail from "./detail";
+import Cart from "./Cart";
 
 // Router
 import { Route, Switch, Redirect } from "react-router-native";
@@ -28,6 +29,7 @@ class MainContent extends Component {
           <PrivateRoute path="/privateLul" component={PrivateLul} />
           <PrivateRoute path="/profile" component={Profile} />
           <Route path="/login" component={Login} />
+          <Route path="/Cart" component={Cart} />
           <Redirect to="/lol" />
         </Switch>
       </Content>

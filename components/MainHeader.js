@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import store from "../stores/store";
 
 // NativeBase
 import { Header, Body, Text, Left, Button, Icon, Right } from "native-base";
 
 // Routing
 import { withRouter } from "react-router-native";
+import { Link } from "react-router-native";
 
 class MainHeader extends Component {
   render() {
@@ -18,7 +20,13 @@ class MainHeader extends Component {
         <Body>
           <Text>What the shop</Text>
         </Body>
-        <Right />
+        <Right>
+          <Link component={Button} to='/Cart' transparent>
+            <Text>
+              {store.counter} <Icon name="beer" />
+            </Text>
+          </Link>
+        </Right>
       </Header>
     );
   }
