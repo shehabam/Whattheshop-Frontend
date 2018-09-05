@@ -36,3 +36,6 @@ class MainContent extends Component {
 }
 
 export default MainContent;
+
+// Should comment out or remove routes your not using anymore
+// And the final redirect should go to your main component instead of '/lol'

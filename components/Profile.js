@@ -21,3 +21,6 @@ class Profile extends Component {
   }
 }
 export default Profile;
+
+// The logout functionality is not yet implemented
+// Check the store to find the logout function
