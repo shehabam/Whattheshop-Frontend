@@ -13,7 +13,6 @@ class Profile extends Component {
   // }
 
   render() {
-    console.log(authStore.user);
     if (!authStore.user) return <Redirect to="/register" />;
 
     return (
