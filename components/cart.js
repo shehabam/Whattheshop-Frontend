@@ -1,18 +1,14 @@
 import React, { Component } from "react";
-import { Image } from "react-native";
+import { FlatList } from "react-native";
 import { observer } from "mobx-react";
-import { Link } from "react-router-native";
 
 import {
-  Container,
-  Header,
-  Content,
   Card,
   CardItem,
   Thumbnail,
   Text,
-  Button,
-  Icon,
+  ListItem,
+  List,
   Left,
   Body,
   View
@@ -21,8 +17,25 @@ import store from "../stores/store";
 
 class Cart extends Component {
   render() {
-    return <View />;
+    const cartViewList = store.CartList.map(cartView => (
+      <Card key={cartView.id}>
+        <CardItem>
+          <Left>
+            <Thumbnail source={{ uri: cartView.img }} />
+          </Left>
+        </CardItem>
+        <Body>
+          <Text>{cartView.name}</Text>
+          <Text note>
+            {cartView.price}
+            .000 KD
+          </Text>
+          <Text>Description: {cartView.description}</Text>
+        </Body>
+      </Card>
+    ));
+    return <View>{cartViewList}</View>;
   }
 }
 
-export default Cart;
+export default observer(Cart);

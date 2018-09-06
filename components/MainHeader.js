@@ -19,10 +19,12 @@ class MainHeader extends Component {
         <Body>
           <Text>Diapers</Text>
         </Body>{" "}
-        <Link to="/cart/" component={Button} transparent>
-          <Icon name="cart" />
-        </Link>
-        <Right />
+        <Right>
+          <Link to="/cart/" component={Button} transparent>
+            {" "}
+            <Icon name="cart" />
+          </Link>
+        </Right>
       </Header>
     );
   }

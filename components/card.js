@@ -15,7 +15,8 @@ import {
   Icon,
   Left,
   Body,
-  View
+  View,
+  Right
 } from "native-base";
 import store from "../stores/store";
 
@@ -25,33 +26,38 @@ class Carda extends Component {
     const item = store.product.map((
       product // <Text>{product.name}</Text>
     ) => (
-      <Container key={product.id}>
-        <Link to={`/details/${product.id}`}>
-          <Card style={{ flex: 0 }}>
-            <CardItem>
-              <Left>
-                <Thumbnail source={{ uri: product.img }} />
-                <Body>
-                  <Text>{product.name}</Text>
-                  <Text note>
-                    {product.price}
-                    .000 KD
-                  </Text>
-                </Body>
-              </Left>
-            </CardItem>
-            <CardItem>
+      <Link to={`/details/${product.id}`} key={product.id}>
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail square source={{ uri: product.img }} />
               <Body>
-                <Image
-                  source={{ uri: product.img }}
-                  style={{ height: 200, width: 200, flex: 1 }}
-                />
-                <Text>Description: {product.description}</Text>
+                <Text>{product.name}</Text>
               </Body>
-            </CardItem>
-          </Card>
-        </Link>
-      </Container>
+            </Left>
+            <Right>
+              <Text note>
+                {product.price}
+                .000 KD
+              </Text>
+            </Right>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Text>Description: {product.description}</Text>
+            </Body>
+            <Right>
+              <Button
+                style={{ borderRadius: 90, width: 47 }}
+                onPress={() => store.addFromList()}
+                transparent
+              >
+                <Icon type="FontAwesome" name="plus" style={{ fontSize: 30 }} />
+              </Button>
+            </Right>
+          </CardItem>
+        </Card>
+      </Link>
     ));
 
     return <Container> {item}</Container>;

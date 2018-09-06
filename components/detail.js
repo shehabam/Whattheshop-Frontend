@@ -27,32 +27,44 @@ class Detail extends Component {
 
     return (
       <Container>
-        <Header />
-        <Content>
-          <Card>
-            <CardItem>
-              <Left>
-                <Body>
-                  <Text>{detailed.name}</Text>
-                  <Text note>
-                    {detailed.price}
-                    .000 KD
-                  </Text>
-                </Body>
-              </Left>
-            </CardItem>
-
-            <CardItem cardBody>
-              <Image
-                source={{ uri: detailed.img }}
-                style={{ height: 200, width: null, flex: 1 }}
-              />
-            </CardItem>
-            <Body>
-              <Text>Description: {detailed.description}</Text>
-            </Body>
-          </Card>
-        </Content>
+        <Card>
+          <CardItem>
+            <Left>
+              <Body>
+                <Thumbnail source={{ uri: detailed.img }} />
+                <Text>{detailed.name}</Text>
+                <Text note>
+                  {detailed.price}
+                  .000 KD
+                </Text>
+              </Body>
+            </Left>
+          </CardItem>
+          <CardItem cardBody>
+            <Image
+              source={{ uri: detailed.img }}
+              style={{ height: 200, width: null, flex: 1 }}
+            />
+          </CardItem>
+          <Body>
+            <Text>Description: {detailed.description}</Text>
+          </Body>
+        </Card>
+        <Button
+          success
+          full
+          onPress={() =>
+            store.addToTheCartList(
+              detailed.id,
+              detailed.name,
+              detailed.price,
+              detailed.img,
+              detailed.description
+            )
+          }
+        >
+          <Text>Add To The Cart List </Text>
+        </Button>
       </Container>
     );
   }
