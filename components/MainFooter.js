@@ -1,5 +1,15 @@
 import React, { Component } from "react";
 
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Image,
+  TextInput,
+  Dimensions,
+  TouchableOpacity
+} from "react-native";
 // NativeBase
 import { Footer, FooterTab, Button, Icon } from "native-base";
 
@@ -25,5 +35,9 @@ class MainFooter extends Component {
     );
   }
 }
-
+const styles = StyleSheet.create({
+  backgr: {
+    backgroundColor: "#77868C"
+  }
+});
 export default MainFooter;

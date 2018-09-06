@@ -15,8 +15,6 @@ import authStore from "./stores/authStore";
 
 // Routing
 import { NativeRouter } from "react-router-native";
-import Carda from "./components/card";
-import store from "./stores/store";
 
 I18nManager.forceRTL(false);
 

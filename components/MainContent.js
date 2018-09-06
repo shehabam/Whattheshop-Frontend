@@ -17,7 +17,7 @@ import { Route, Switch, Redirect } from "react-router-native";
 import PrivateRoute from "../common/PrivateRoute";
 import Carda from "./card";
 import registrationForm from "./registrationForm";
-
+import cart from "./cart";
 class MainContent extends Component {
   render() {
     return (
@@ -25,6 +25,7 @@ class MainContent extends Component {
         <Switch>
           <Route exact path="/" component={Carda} />
           <Route path="/details/:id" component={Detail} />
+          <Route path="/cart/" component={cart} />
           <Route path="/lol" component={Lol} />
           <PrivateRoute path="/privateLul" component={PrivateLul} />
           <Route path="/register" component={registrationForm} />

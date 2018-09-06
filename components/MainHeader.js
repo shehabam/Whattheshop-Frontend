@@ -5,6 +5,7 @@ import { Header, Body, Text, Left, Button, Icon, Right } from "native-base";
 
 // Routing
 import { withRouter } from "react-router-native";
+import { Link } from "react-router-native";
 
 class MainHeader extends Component {
   render() {
@@ -16,8 +17,11 @@ class MainHeader extends Component {
           </Button>
         </Left>
         <Body>
-          <Text>What the shop</Text>
-        </Body>
+          <Text>Diapers</Text>
+        </Body>{" "}
+        <Link to="/cart/" component={Button} transparent>
+          <Icon name="cart" />
+        </Link>
         <Right />
       </Header>
     );

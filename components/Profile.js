@@ -4,6 +4,8 @@ import React, { Component } from "react";
 import { Card, CardItem, Text, Button, View } from "native-base";
 import authStore from "../stores/authStore";
 import { observer } from "mobx-react";
+import { Redirect } from "react-router-native";
+
 import store from "../stores/store";
 
 class Profile extends Component {
