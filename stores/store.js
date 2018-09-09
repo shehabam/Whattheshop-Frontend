@@ -1,5 +1,6 @@
 import { decorate, observable, action } from "mobx";
 import axios from "axios";
+import { Redirect } from "react-router-native";
 
 class Store {
   constructor() {
@@ -26,7 +27,14 @@ class Store {
   }
   //  chekout functionality
   checkout() {
-    axios.post;
+    console.log(this.order);
+    axios
+      .post("http://192.168.100.244:8000/api/orders/", this.order)
+      .then(
+        res =>
+          res.status === 201 ? alert("Horray") : alert("Something Went Wrong")
+      )
+      .catch(err => console.error(err));
   }
 
   addToCart(item_id) {
@@ -72,7 +80,8 @@ decorate(Store, {
   addToTheCartList: action,
   addToCart: action,
   increaseFromCart: action,
-  decreaseFromCart: action
+  decreaseFromCart: action,
+  checkout: action
 });
 
 const store = new Store();

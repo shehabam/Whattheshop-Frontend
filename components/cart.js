@@ -68,15 +68,10 @@ class Cart extends Component {
     return (
       <Container>
         {cartViewList}
-        {/* <Button
-        full
-        onPress={() =>
-          store.add
-        }
-      >
-        <Text>Checkout</Text>
-      </Button> */}
       </Container>
+        <Button full onPress={() => store.checkout()}>
+          <Text>Checkout</Text>
+        </Button>
     );
   }
 }
