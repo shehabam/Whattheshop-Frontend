@@ -50,19 +50,7 @@ class Detail extends Component {
             <Text>Description: {detailed.description}</Text>
           </Body>
         </Card>
-        <Button
-          success
-          full
-          onPress={() =>
-            store.addToTheCartList(
-              detailed.id,
-              detailed.name,
-              detailed.price,
-              detailed.img,
-              detailed.description
-            )
-          }
-        >
+        <Button success full onPress={() => store.addToCart(detailed.id)}>
           <Text>Add To The Cart List </Text>
         </Button>
       </Container>

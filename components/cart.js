@@ -11,13 +11,14 @@ import {
   List,
   Left,
   Body,
-  View
+  View,
+  Button
 } from "native-base";
 import store from "../stores/store";
 
 class Cart extends Component {
   render() {
-    const cartViewList = store.CartList.map(cartView => (
+    const cartViewList = store.order.map(cartView => (
       <Card key={cartView.id}>
         <CardItem>
           <Left>
@@ -34,7 +35,19 @@ class Cart extends Component {
         </Body>
       </Card>
     ));
-    return <View>{cartViewList}</View>;
+    return (
+      <View>
+        {cartViewList}
+        {/* <Button
+        full
+        onPress={() =>
+          store.add
+        }
+      >
+        <Text>Checkout</Text>
+      </Button> */}
+      </View>
+    );
   }
 }
 

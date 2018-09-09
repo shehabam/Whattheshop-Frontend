@@ -6,7 +6,7 @@ class Store {
     this.product = null;
     this.detailedProduct = null;
     this.userDetails = null;
-    this.CartList = [];
+    this.order = [];
     this.counter = 0;
   }
   // GETS THE ALL PRODUCTS
@@ -25,17 +25,32 @@ class Store {
 
     return detailedObj;
   }
-
-  addToTheCartList(id, name, price, img, description) {
-    this.CartList.push({
-      id: id,
-      name: name,
-      price: price,
-      img: img,
-      description: description
-    });
-    this.counter += 1;
+  //  chekout functionality
+  checkout() {
+    axios.post;
   }
+
+  addToCart(item_id) {
+    const isAvailable = this.order.find(product => product.id === item_id);
+    if (isAvailable) {
+      isAvailable.quantity += 1;
+    } else {
+      let item = this.getProductDetail(item_id);
+      let item_added = { ...item, quantity: 1 };
+      this.order.push(item_added);
+      console.log(this.order);
+    }
+  }
+  // addToTheCartList(id, name, price, img, description) {
+  //   this.CartList.push({
+  //     id: id,
+  //     name: name,
+  //     price: price,
+  //     img: img,
+  //     description: description
+  //   });
+  //   this.counter += 1;
+  // }
   addFromList() {
     alert("its working ...");
   }
@@ -47,9 +62,10 @@ decorate(Store, {
   detailedProduct: observable,
   userDetails: observable,
   getProductDetail: action,
-  CartList: observable,
+  order: observable,
   counter: observable,
-  addToTheCartList: action
+  addToTheCartList: action,
+  addToCart: action
 });
 
 const store = new Store();
