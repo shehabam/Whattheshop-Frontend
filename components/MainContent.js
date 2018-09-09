@@ -18,6 +18,7 @@ import PrivateRoute from "../common/PrivateRoute";
 import Carda from "./card";
 import registrationForm from "./registrationForm";
 import cart from "./cart";
+import TyPage from "./tyPage";
 class MainContent extends Component {
   render() {
     return (
@@ -31,6 +32,7 @@ class MainContent extends Component {
           <Route path="/register" component={registrationForm} />
           <Route path="/login" component={Login} />
           <Route path="/profile/" component={Profile} />
+          <Route path="/tyPage/" component={TyPage} />
 
           <Redirect to="/lol" />
         </Switch>
