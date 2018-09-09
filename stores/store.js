@@ -22,7 +22,6 @@ class Store {
 
   getProductDetail(id) {
     const detailedObj = this.product.find(item => +item.id === +id);
-
     return detailedObj;
   }
   //  chekout functionality
@@ -34,25 +33,31 @@ class Store {
     const isAvailable = this.order.find(product => product.id === item_id);
     if (isAvailable) {
       isAvailable.quantity += 1;
+      this.counter += 1;
     } else {
       let item = this.getProductDetail(item_id);
       let item_added = { ...item, quantity: 1 };
       this.order.push(item_added);
-      console.log(this.order);
+      this.counter += 1;
     }
   }
-  // addToTheCartList(id, name, price, img, description) {
-  //   this.CartList.push({
-  //     id: id,
-  //     name: name,
-  //     price: price,
-  //     img: img,
-  //     description: description
-  //   });
-  //   this.counter += 1;
-  // }
-  addFromList() {
-    alert("its working ...");
+  increaseFromCart(id) {
+    const isAvailable = this.order.find(product => product.id === id);
+    if (isAvailable) {
+      isAvailable.quantity += 1;
+      this.counter += 1;
+    }
+  }
+
+  decreaseFromCart(id) {
+    const isAvailable = this.order.find(product => product.id === id);
+    if (isAvailable) {
+      isAvailable.quantity -= 1;
+      this.counter -= 1;
+      if (isAvailable.quantity === 0) {
+        alert("please delete me !!!");
+      }
+    }
   }
 }
 decorate(Store, {
@@ -65,7 +70,9 @@ decorate(Store, {
   order: observable,
   counter: observable,
   addToTheCartList: action,
-  addToCart: action
+  addToCart: action,
+  increaseFromCart: action,
+  decreaseFromCart: action
 });
 
 const store = new Store();

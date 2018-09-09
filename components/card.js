@@ -5,8 +5,6 @@ import { Link } from "react-router-native";
 
 import {
   Container,
-  Header,
-  Content,
   Card,
   CardItem,
   Thumbnail,
@@ -16,11 +14,21 @@ import {
   Left,
   Body,
   View,
-  Right
+  Right,
+  Toast
 } from "native-base";
 import store from "../stores/store";
 
 class Carda extends Component {
+  increase(id) {
+    store.addToCart(id);
+    Toast.show({
+      text: "You Added an Item",
+      textStyle: { color: "#77FF33" },
+      buttonText: "+1",
+      buttonTextStyle: { color: "#77FF33" }
+    });
+  }
   render() {
     if (!store.product) return <View />;
     const item = store.product.map((
@@ -49,7 +57,7 @@ class Carda extends Component {
             <Right>
               <Button
                 style={{ borderRadius: 90, width: 47 }}
-                onPress={() => store.addFromList()}
+                onPress={() => this.increase(product.id)}
                 transparent
               >
                 <Icon type="FontAwesome" name="plus" style={{ fontSize: 30 }} />

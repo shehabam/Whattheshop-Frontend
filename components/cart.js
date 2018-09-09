@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { FlatList } from "react-native";
 import { observer } from "mobx-react";
 
 import {
@@ -10,33 +9,64 @@ import {
   ListItem,
   List,
   Left,
+  Right,
   Body,
-  View,
-  Button
+  Button,
+  Container,
+  Icon,
+  Toast
 } from "native-base";
 import store from "../stores/store";
 
 class Cart extends Component {
+  increase(id) {
+    store.increaseFromCart(id);
+    Toast.show({
+      text: "You Added an Item",
+      textStyle: { color: "#77FF33" },
+      buttonText: "+1",
+      buttonTextStyle: { color: "#77FF33" }
+    });
+  }
+
+  decrease(id) {
+    store.decreaseFromCart(id);
+    Toast.show({
+      text: "You Deleted an Item",
+      textStyle: { color: "#FF3333" },
+      buttonText: "-1",
+      buttonTextStyle: { color: "#FF3333" }
+    });
+  }
+
   render() {
     const cartViewList = store.order.map(cartView => (
-      <Card key={cartView.id}>
-        <CardItem>
+      <List key={cartView.id}>
+        <ListItem thumbnail>
           <Left>
-            <Thumbnail source={{ uri: cartView.img }} />
+            <Button transparent onPress={() => this.decrease(cartView.id)}>
+              <Icon type="FontAwesome" name="minus" />
+            </Button>
+            <Thumbnail square source={{ uri: cartView.img }} />
           </Left>
-        </CardItem>
-        <Body>
-          <Text>{cartView.name}</Text>
-          <Text note>
-            {cartView.price}
-            .000 KD
-          </Text>
-          <Text>Description: {cartView.description}</Text>
-        </Body>
-      </Card>
+          <Body>
+            <Text>{cartView.name}</Text>
+            <Text note>
+              {cartView.price}
+              .000 KD
+            </Text>
+            <Text note>{cartView.quantity}</Text>
+          </Body>
+          <Right>
+            <Button transparent onPress={() => this.increase(cartView.id)}>
+              <Icon type="FontAwesome" name="plus" />
+            </Button>
+          </Right>
+        </ListItem>
+      </List>
     ));
     return (
-      <View>
+      <Container>
         {cartViewList}
         {/* <Button
         full
@@ -46,9 +76,11 @@ class Cart extends Component {
       >
         <Text>Checkout</Text>
       </Button> */}
-      </View>
+      </Container>
     );
   }
 }
 
 export default observer(Cart);
+
+// style={{ fontSize: 30 }}
