@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { observer } from "mobx-react";
 
 // NativeBase
 import { Header, Body, Text, Left, Button, Icon, Right } from "native-base";
@@ -6,6 +7,7 @@ import { Header, Body, Text, Left, Button, Icon, Right } from "native-base";
 // Routing
 import { withRouter } from "react-router-native";
 import { Link } from "react-router-native";
+import store from "../stores/store";
 
 class MainHeader extends Component {
   render() {
@@ -21,8 +23,9 @@ class MainHeader extends Component {
         </Body>{" "}
         <Right>
           <Link to="/cart/" component={Button} transparent>
-            {" "}
-            <Icon name="cart" />
+            <Text>
+              {store.counter} <Icon name="cart" />
+            </Text>
           </Link>
         </Right>
       </Header>
@@ -30,4 +33,4 @@ class MainHeader extends Component {
   }
 }
 
-export default withRouter(MainHeader);
+export default withRouter(observer(MainHeader));
