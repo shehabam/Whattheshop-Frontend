@@ -38,14 +38,9 @@ class Cart extends Component {
     return (
       <View>
         {cartViewList}
-        {/* <Button
-        full
-        onPress={() =>
-          store.add
-        }
-      >
-        <Text>Checkout</Text>
-      </Button> */}
+        <Button full onPress={() => store.checkout()}>
+          <Text>Checkout</Text>
+        </Button>
       </View>
     );
   }
