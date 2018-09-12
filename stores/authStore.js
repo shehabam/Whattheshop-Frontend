@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
 
 const instance = axios.create({
-  baseURL: "http://192.168.100.244:8000/"
+  baseURL: "http://127.0.0.1:8000/"
 });
 
 class Store {
@@ -37,7 +37,7 @@ class Store {
   }
   getUserProfile() {
     axios
-      .get("http://192.168.100.244:8000/api/user/profile/" + 22 + "/")
+      .get("http://127.0.0.1:8000/api/user/profile/" + 22 + "/")
       .then(res => console.log(res.data))
       .then(profile => (this.userDetails = profile))
       .catch(err => console.error(err));

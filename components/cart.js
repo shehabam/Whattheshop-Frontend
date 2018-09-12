@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+import { Link } from "react-router-native";
 
 import {
   Card,
@@ -17,6 +18,7 @@ import {
   Toast
 } from "native-base";
 import store from "../stores/store";
+import authStore from "../stores/authStore";
 
 class Cart extends Component {
   increase(id) {
@@ -68,14 +70,18 @@ class Cart extends Component {
     return (
       <Container>
         {cartViewList}
+        {authStore.isAuthenticated ? (
+          <Button full onPress={() => store.checkout()}>
+            <Text>Checkout</Text>
+          </Button>
+        ) : (
+          <Link to="/register/" component={Button} full>
+            <Text>Login</Text>
+          </Link>
+        )}
       </Container>
-        <Button full onPress={() => store.checkout()}>
-          <Text>Checkout</Text>
-        </Button>
     );
   }
 }
 
 export default observer(Cart);
-
-// style={{ fontSize: 30 }}

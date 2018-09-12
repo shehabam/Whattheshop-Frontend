@@ -15,7 +15,9 @@ import {
   Body,
   View,
   Right,
-  Toast
+  Toast,
+  Input,
+  Item
 } from "native-base";
 import store from "../stores/store";
 
@@ -31,9 +33,7 @@ class Carda extends Component {
   }
   render() {
     if (!store.product) return <View />;
-    const item = store.product.map((
-      product // <Text>{product.name}</Text>
-    ) => (
+    const item = store.filteredProducts.map(product => (
       <Link to={`/details/${product.id}`} key={product.id}>
         <Card>
           <CardItem>
@@ -68,7 +68,23 @@ class Carda extends Component {
       </Link>
     ));
 
-    return <Container> {item}</Container>;
+    return (
+      <Container>
+        <Item rounded>
+          <Input
+            placeholder="Search by CATEGORY"
+            onChangeText={e => store.changeCategoryValue(e)}
+          />
+        </Item>
+        <Item rounded>
+          <Input
+            placeholder="Search by product"
+            onChangeText={e => store.changeProductValue(e)}
+          />
+        </Item>{" "}
+        {item}{" "}
+      </Container>
+    );
   }
 }
 export default observer(Carda);

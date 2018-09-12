@@ -30,7 +30,6 @@ class MainContent extends Component {
           <Route path="/lol" component={Lol} />
           <PrivateRoute path="/privateLul" component={PrivateLul} />
           <Route path="/register" component={registrationForm} />
-          <Route path="/login" component={Login} />
           <Route path="/profile/" component={Profile} />
           <Route path="/tyPage/" component={TyPage} />
 

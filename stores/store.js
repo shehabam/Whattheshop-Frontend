@@ -1,6 +1,7 @@
-import { decorate, observable, action } from "mobx";
+import { decorate, observable, action, computed } from "mobx";
 import axios from "axios";
 import { Redirect } from "react-router-native";
+import { AsyncStorage } from "react-native";
 
 class Store {
   constructor() {
@@ -9,14 +10,30 @@ class Store {
     this.userDetails = null;
     this.order = [];
     this.counter = 0;
+    this.orderHistory = null;
+    this.filteredProducts = null;
+    this.theQuery = "";
+    // this.searchQuery = {
+    //   name: "iphone",
+    //   lowestPrice: 10,
+    //   highestPrice: 200
+    // };
   }
+  // Advance Search Query
+  // searchForQuery() {
+  //   Object.keys(this.searchQuery).forEach(key =>
+  //     console.log(key, this.searchQuery[key])
+  //   );
+  // }
   // GETS THE ALL PRODUCTS
   getProducts() {
     axios
-      .get("http://192.168.100.244:8000/api/list/")
+      .get("http://127.0.0.1:8000/api/list/")
       .then(res => res.data)
       .then(items => {
         this.product = items;
+        this.filteredProducts = items;
+        this.filteredCategories = items;
       })
       .catch(err => console.error(err));
   }
@@ -29,12 +46,34 @@ class Store {
   checkout() {
     console.log(this.order);
     axios
-      .post("http://192.168.100.244:8000/api/orders/", this.order)
+      .post("http://127.0.0.1:8000/api/acceptingOrders/", this.order)
       .then(
         res =>
           res.status === 201 ? alert("Horray") : alert("Something Went Wrong")
       )
       .catch(err => console.error(err));
+  }
+
+  onSearchProductChangeHandler(e) {
+    const list = this.product.filter(product =>
+      product.name.toLowerCase().includes(e)
+    );
+    this.filteredProducts = list;
+  }
+  changeProductValue(e) {
+    this.theQuery = e.toLowerCase();
+    this.onSearchProductChangeHandler(this.theQuery);
+  }
+  // ##########################################
+  onSearchCategoryChangeHandler(e) {
+    const list = this.product.filter(product =>
+      product.category.category_name.toLowerCase().includes(e)
+    );
+    this.filteredProducts = list;
+  }
+  changeCategoryValue(e) {
+    this.theQuery = e.toLowerCase();
+    this.onSearchCategoryChangeHandler(this.theQuery);
   }
 
   addToCart(item_id) {
@@ -57,13 +96,26 @@ class Store {
     }
   }
 
+  getOrdersHistory() {
+    axios
+      .get("http://127.0.0.1:8000/api/orders/history/")
+      .then(res => res.data)
+      .then(history => (this.orderHistory = history))
+      .catch(err => console.error(err));
+  }
+
   decreaseFromCart(id) {
+    let itemIndex = null;
     const isAvailable = this.order.find(product => product.id === id);
     if (isAvailable) {
       isAvailable.quantity -= 1;
       this.counter -= 1;
-      if (isAvailable.quantity === 0) {
-        alert("please delete me !!!");
+      if (isAvailable.quantity === 0 || this.counter === 0) {
+        alert("IT IS ZEEEERO");
+        let index = this.order.findIndex(item => item.id === id);
+        if (itemIndex !== -1) {
+          this.order.splice(index, 1);
+        }
       }
     }
   }
@@ -81,9 +133,14 @@ decorate(Store, {
   addToCart: action,
   increaseFromCart: action,
   decreaseFromCart: action,
-  checkout: action
+  checkout: action,
+  orderHistory: observable,
+  query: observable,
+  theQuery: observable,
+  filteredProducts: observable
 });
 
 const store = new Store();
 store.getProducts();
+
 export default store;
