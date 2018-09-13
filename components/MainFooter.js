@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import store from "../stores/store";
+import { observer } from "mobx-react";
 
 import {
   StyleSheet,
@@ -24,9 +26,7 @@ class MainFooter extends Component {
           <Link component={Button} to="/">
             <Icon type="MaterialCommunityIcons" name="baby" />
           </Link>
-          <Link component={Button} to="/privateLul">
-            <Icon name="lock" />
-          </Link>
+
           <Link component={Button} to="/register">
             <Icon name="person" />
           </Link>
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
     backgroundColor: "#77868C"
   }
 });
-export default MainFooter;
+export default observer(MainFooter);

@@ -19,12 +19,14 @@ import Carda from "./card";
 import registrationForm from "./registrationForm";
 import cart from "./cart";
 import TyPage from "./tyPage";
+import List from "./List";
 class MainContent extends Component {
   render() {
     return (
       <Content>
         <Switch>
-          <Route exact path="/" component={Carda} />
+          <Route exact path="/" component={List} />
+          <Route path="/Card/:id" component={Carda} />
           <Route path="/details/:id" component={Detail} />
           <Route path="/cart/" component={cart} />
           <Route path="/lol" component={Lol} />
@@ -32,7 +34,6 @@ class MainContent extends Component {
           <Route path="/register" component={registrationForm} />
           <Route path="/profile/" component={Profile} />
           <Route path="/tyPage/" component={TyPage} />
-
           <Redirect to="/lol" />
         </Switch>
       </Content>

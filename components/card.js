@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Image } from "react-native";
 import { observer } from "mobx-react";
 import { Link } from "react-router-native";
 
@@ -32,8 +31,11 @@ class Carda extends Component {
     });
   }
   render() {
-    if (!store.product) return <View />;
-    const item = store.filteredProducts.map(product => (
+    const theId = this.props.match.params.id;
+    const productInCategory = store.getProductByCategory(theId);
+
+    if (!store.productWithCat) return <View />;
+    const item = store.productWithCat.items.map(product => (
       <Link to={`/details/${product.id}`} key={product.id}>
         <Card>
           <CardItem>
@@ -70,12 +72,12 @@ class Carda extends Component {
 
     return (
       <Container>
-        <Item rounded>
+        {/* <Item rounded>
           <Input
             placeholder="Search by CATEGORY"
             onChangeText={e => store.changeCategoryValue(e)}
           />
-        </Item>
+        </Item> */}
         <Item rounded>
           <Input
             placeholder="Search by product"

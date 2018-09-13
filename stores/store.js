@@ -13,22 +13,13 @@ class Store {
     this.orderHistory = null;
     this.filteredProducts = null;
     this.theQuery = "";
-    // this.searchQuery = {
-    //   name: "iphone",
-    //   lowestPrice: 10,
-    //   highestPrice: 200
-    // };
+    this.categoryList = null;
+    this.productWithCat = null;
   }
-  // Advance Search Query
-  // searchForQuery() {
-  //   Object.keys(this.searchQuery).forEach(key =>
-  //     console.log(key, this.searchQuery[key])
-  //   );
-  // }
-  // GETS THE ALL PRODUCTS
   getProducts() {
     axios
-      .get("http://127.0.0.1:8000/api/list/")
+      .get("http://192.168.100.244:8000/api/list/")
+      // .get("http://127.0.0.1:8000/api/list/")
       .then(res => res.data)
       .then(items => {
         this.product = items;
@@ -37,21 +28,33 @@ class Store {
       })
       .catch(err => console.error(err));
   }
+  getProductByCategory(id) {
+    const card_obj = this.product.find(item => +item.id === +id);
+    this.productWithCat = card_obj;
+  }
 
   getProductDetail(id) {
-    const detailedObj = this.product.find(item => +item.id === +id);
+    let items = [];
+    this.product.forEach(category => {
+      items = items.concat(category.items.slice());
+    });
+
+    const detailedObj = items.find(item => +item.id === +id);
     return detailedObj;
   }
   //  chekout functionality
   checkout() {
     console.log(this.order);
     axios
-      .post("http://127.0.0.1:8000/api/acceptingOrders/", this.order)
+      .post("http://192.168.100.244:8000/api/acceptingOrders/", this.order)
       .then(
         res =>
           res.status === 201 ? alert("Horray") : alert("Something Went Wrong")
       )
       .catch(err => console.error(err));
+
+    this.order.length = 0;
+    this.counter = 0;
   }
 
   onSearchProductChangeHandler(e) {
@@ -98,7 +101,7 @@ class Store {
 
   getOrdersHistory() {
     axios
-      .get("http://127.0.0.1:8000/api/orders/history/")
+      .get("http://192.168.100.244:8000/api/orders/history/")
       .then(res => res.data)
       .then(history => (this.orderHistory = history))
       .catch(err => console.error(err));
@@ -137,7 +140,10 @@ decorate(Store, {
   orderHistory: observable,
   query: observable,
   theQuery: observable,
-  filteredProducts: observable
+  filteredProducts: observable,
+  categoryList: observable,
+  getProductByCategory: action,
+  productWithCat: observable
 });
 
 const store = new Store();

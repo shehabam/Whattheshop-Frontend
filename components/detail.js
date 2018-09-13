@@ -14,16 +14,26 @@ import {
   Icon,
   Left,
   Body,
-  Right,
-  View
+  Toast
 } from "native-base";
 
 class Detail extends Component {
+  increase(id) {
+    store.addToCart(id);
+    Toast.show({
+      text: "You Added an Item",
+      textStyle: { color: "#77FF33" },
+      buttonText: "+1",
+      buttonTextStyle: { color: "#77FF33" }
+    });
+  }
+
   render() {
     const theID = this.props.match.params.id;
     // console.log(theID);
     const detailed = store.getProductDetail(theID);
     // const detailed = store.detailedProduct;
+    console.log(detailed);
 
     return (
       <Container>
@@ -50,7 +60,7 @@ class Detail extends Component {
             <Text>Description: {detailed.description}</Text>
           </Body>
         </Card>
-        <Button success full onPress={() => store.addToCart(detailed.id)}>
+        <Button success full onPress={() => this.increase(detailed.id)}>
           <Text>Add To The Cart List </Text>
         </Button>
       </Container>

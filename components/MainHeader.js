@@ -2,7 +2,17 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 
 // NativeBase
-import { Header, Body, Text, Left, Button, Icon, Right } from "native-base";
+import {
+  Header,
+  Body,
+  Text,
+  Left,
+  Button,
+  Icon,
+  Right,
+  Item,
+  Input
+} from "native-base";
 
 // Routing
 import { withRouter } from "react-router-native";

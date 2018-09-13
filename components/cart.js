@@ -71,9 +71,14 @@ class Cart extends Component {
       <Container>
         {cartViewList}
         {authStore.isAuthenticated ? (
-          <Button full onPress={() => store.checkout()}>
+          <Link
+            to="/profile/"
+            component={Button}
+            full
+            onPress={() => store.checkout()}
+          >
             <Text>Checkout</Text>
-          </Button>
+          </Link>
         ) : (
           <Link to="/register/" component={Button} full>
             <Text>Login</Text>
